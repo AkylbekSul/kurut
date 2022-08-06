@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
-	"github.com/rasulov-emirlan/kurut/runtime"
+	"github.com/rasulov-emirlan/kurut/lexer"
+	"github.com/rasulov-emirlan/kurut/parser"
 )
 
 func main() {
@@ -12,8 +14,16 @@ func main() {
 		panic(err)
 	}
 
-	err = runtime.Run(file)
-	if err != nil {
-		panic(err)
+	l := lexer.NewLexer(file)
+	tokens := parser.Tokens{}
+	for {
+		position, token, value := l.Lex()
+		if token == lexer.EOF {
+			break
+		}
+		tokens.Positions = append(tokens.Positions, position)
+		tokens.Tokens = append(tokens.Tokens, token)
+		tokens.Values = append(tokens.Values, value)
+		fmt.Printf("%d:%d\t%s\t%s\n", position.Line, position.Column, token, value)
 	}
 }

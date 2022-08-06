@@ -1,7 +1,7 @@
 package lexer
 
 type (
-	Token int
+	Token   int
 	Keyword int
 )
 
@@ -17,28 +17,39 @@ const (
 	MUL
 	DIV
 
+	COMPARISON
+
+	SCOPE // {}
+
+	FUNC // ()
+
+	STRING
+
 	KEYWORD
 
 	PRINT Keyword = iota
 )
 
 var tokens = map[Token]string{
-	EOF: "EOF",
-	ILLEGAL: "ILLEGAL",
-	IDENT: "IDENT",
-	INT: "INT",
-	ASSIGN: "=",
-	PLUS: "+",
-	MINUS: "-",
-	MUL: "*",
-	DIV: "/",
-	KEYWORD: "KEYWORD",
+	EOF:        "EOF",
+	ILLEGAL:    "ILLEGAL",
+	IDENT:      "IDENT",
+	INT:        "INT",
+	ASSIGN:     "=",
+	PLUS:       "+",
+	MINUS:      "-",
+	MUL:        "*",
+	DIV:        "/",
+	COMPARISON: "COMPARE",
+	KEYWORD:    "KEYWORD",
+	SCOPE:      "{}",
+	FUNC:       "()",
+	STRING:     "STRING",
 }
 
 var Keywords = map[Keyword]string{
 	PRINT: "print",
 }
-
 
 func (t Token) String() string {
 	v, ok := tokens[t]
