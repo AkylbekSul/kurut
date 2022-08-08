@@ -3,6 +3,13 @@ package lexer
 type (
 	Token   int
 	Keyword int
+
+	// TODO: create a better name for this struct
+	Tokens struct {
+		Position Position
+		Token    Token
+		Value    string
+	}
 )
 
 const (
